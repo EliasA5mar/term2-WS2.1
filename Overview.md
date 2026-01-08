@@ -1,3 +1,12 @@
+﻿# ROBOTIC BOTTLE FLIP 
+### Group 1
+#### Team Members 
+> - **Arthur Rotstien**
+> - **Amaro Bravo**
+> - **Heleri Koltsin**
+> - **Elias Asmar**
+![alt text](ezgif-479d2f691f2488f2.gif)
+
 # Robotic Bottle Flipping
 
 An autonomous robotic system that performs bottle flipping using a robotic arm and gripper. The system integrates perception, manipulation, motion planning, and machine learning to achieve consistent bottle flips.
@@ -163,7 +172,7 @@ If you use this project in your research, please cite:
 ```bibtex
 @misc{robotic_bottle_flipping,
   title={Robotic Bottle Flipping: An Integrated Approach},
-  author={Your Team},
+  author={group 1},
   year={2026},
   url={https://github.com/yourusername/robotic-bottle-flipping}
 }

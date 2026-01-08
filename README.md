@@ -1,0 +1,97 @@
+# Robotic Bottle Flip — System Concept
+
+## Overview
+The goal of the system is to throw a bottle such that:
+- The bottle performs a 360° rotation
+- The bottle lands in a vertical position
+- The process is repeatable
+
+---
+
+## System Architecture
+The system is composed of five interconnected modules:
+
+- **Perception Module (Heleri)**  
+  Detects the bottle’s position, orientation, and fill level.
+
+- **Grasping Module (Arthur)**  
+  Determines grip position and force to ensure stable yet releasable control.
+
+- **Motion Generation Module (Amaro)**  
+  Produces the throwing trajectory defined by velocity, angle, and release timing.
+
+- **Physics Interaction Phase (Elias)**  
+  Models bottle dynamics after release (gravity, fluid motion).
+
+- **Evaluation & Learning Module**  
+  Assesses outcome and updates parameters for future attempts.
+
+---
+
+## Task Decomposition
+
+### A. Perception
+- Where is the bottle?
+- What is its orientation?
+- How full is it?
+- What surface will it land on?
+
+### B. Grasping
+- Where to grab the bottle?
+- How strong should the grip be?
+- Is the bottle slipping?
+
+### C. Motion / Throw
+- How fast to move?
+- At what angle?
+- When to release?
+
+### D. Physics (After Release)
+- Rotation speed
+- Center of mass shift (water)
+- Gravity and air resistance
+
+### E. Evaluation
+- Did it land upright?
+- Did it fall?
+- Should the robot adjust the next attempt?
+
+---
+
+## Tools
+
+### Robot
+- 6-DOF robotic arm (UR, Franka, xArm, etc.)
+- Or simplified 2–3 DOF arm for experiments
+
+### End-Effector
+- Gripper or soft gripper
+- Must:
+  - Hold the bottle firmly
+  - Release cleanly (no sticking)
+
+---
+
+## Parameters & Design Space
+
+### Visual
+- Parameter cloud around bottle trajectory
+
+### Key Parameters
+- Release angle
+- Release velocity
+- Grip position
+- Fill ratio
+- Surface friction
+
+---
+
+## Perception Module (Heleri)
+
+The Perception Module is responsible for estimating:
+- Bottle position in 3D space
+- Bottle orientation
+- Fill level (liquid volume estimation)
+- Landing surface properties
+
+This information is used to inform grasp planning and motion generation.

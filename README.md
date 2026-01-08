@@ -1,86 +1,97 @@
-# Group Project Repository Submission Template 
-## Index
-  - [Overview](#overview) 
-  - [Getting Started](#getting-started)
-  - [Demo](#demo)
-  - [Authors](#authors)
-  - [References](#references)
-  - [Credits](#credits)
-<!--  Other options to write Readme
-  - [Deployment](#deployment)
-  - [Used or Referenced Projects](Used-or-Referenced-Projects)
--->
-## MRAC0X(XX/XX): ClassName XX - Student Project Name
-<!--Write a few sentences of academic context and project description -->  
-This project aims to demonstrate a fantastic application using fascinating technologies, developed within the scope of the best class ever.   
+# Robotic Bottle Flip — System Concept
+
 ## Overview
-<!-- Write Overview about this project -->
-The project's justification, state-of-the-art, and inspiration live in this section.
+The goal of the system is to throw a bottle such that:
+- The bottle performs a 360° rotation
+- The bottle lands in a vertical position
+- The process is repeatable
 
-## Getting Started
+---
 
-### Prerequisites
-Ensure that you fulfill the following criteria to replicate this project.
-* Ubuntu LTS 20.04 <
-* Python 3.7 <
-* Docker
+## System Architecture
+The system is composed of five interconnected modules:
 
-### Depencies
-The project's dependencies include:
-* Numpy - for matrix manipulation
-* OpenCV - for image processing
-* ROS - for interfacing with the robot
+- **Perception Module (Heleri)**  
+  Detects the bottle’s position, orientation, and fill level.
 
-The dependencies are satisfied using the following sources:
+- **Grasping Module (Arthur)**  
+  Determines grip position and force to ensure stable yet releasable control.
 
-```bash
-# ROS Noetic and core dependencies
-wget -c https://raw.githubusercontent.com/qboticslabs/ros_install_noetic/master/ros_install_noetic.sh && chmod +x ./ros_install_noetic.sh && ./ros_install_noetic.sh
-# install numpy
-pip3 install numpy setuptools
-```
+- **Motion Generation Module (Amaro)**  
+  Produces the throwing trajectory defined by velocity, angle, and release timing.
 
-### Installing
-A step by step series of examples that tell you how to get a development 
-env running
+- **Physics Interaction Phase (Elias)**  
+  Models bottle dynamics after release (gravity, fluid motion).
 
-```bash
-cd ~/catkin_ws/src
-git submodule init
-git submodule update
-cd ../
-rosdep install --from-paths src --ignore-src -r -y
-catkin_make -DCMAKE_BUILD_TYPE=Release
-source ./devel/setup.bash
-```
-### Deployment
-Add additional notes about how to deploy this on a live system
-* Run the application with `.docker/run_user_nvidia.sh`
-* Ensure that you are running the indicate command `sudo chmod -R <user_name> \dev_ws` for permitions
-* Run `terminator`
+- **Evaluation & Learning Module**  
+  Assesses outcome and updates parameters for future attempts.
 
-## Demo
-Here is what the project can do and what are the results.
+---
 
-The project can be launched with the following command:
-* `roslaunch package_name package_name.launch`
+## Task Decomposition
 
-This opens up `rviz` and shows the robot moving around
+### A. Perception
+- Where is the bottle?
+- What is its orientation?
+- How full is it?
+- What surface will it land on?
 
-## Authors
-  - [Name](insert linkedin/webpage link) - role
+### B. Grasping
+- Where to grab the bottle?
+- How strong should the grip be?
+- Is the bottle slipping?
 
-## References
-- [K. Albee et al., “A robust observation, planning, and control pipeline for autonomous rendezvous with tumbling targets,” Frontiers in Robotics and AI, vol. 8, p. 234, 2021, doi: 10.3389/frobt.2021.641338.](https://www.frontiersin.org/articles/10.3389/frobt.2021.641338/full)
+### C. Motion / Throw
+- How fast to move?
+- At what angle?
+- When to release?
 
-## Credits
-  - [Name](insert linkedin/webpage link) - role
+### D. Physics (After Release)
+- Rotation speed
+- Center of mass shift (water)
+- Gravity and air resistance
 
-<!--  DO NOT REMOVE
--->
-#### Acknowledgements
+### E. Evaluation
+- Did it land upright?
+- Did it fall?
+- Should the robot adjust the next attempt?
 
-- Creation of GitHub template: [Marita Georganta](https://www.linkedin.com/in/marita-georganta/) - Robotic Sensing Expert
-- Creation of MRAC-IAAC GitHub Structure: [Huanyu Li](https://www.linkedin.com/in/huanyu-li-457590268/) - Robotic Researcher
+---
 
+## Tools
 
+### Robot
+- 6-DOF robotic arm (UR, Franka, xArm, etc.)
+- Or simplified 2–3 DOF arm for experiments
+
+### End-Effector
+- Gripper or soft gripper
+- Must:
+  - Hold the bottle firmly
+  - Release cleanly (no sticking)
+
+---
+
+## Parameters & Design Space
+
+### Visual
+- Parameter cloud around bottle trajectory
+
+### Key Parameters
+- Release angle
+- Release velocity
+- Grip position
+- Fill ratio
+- Surface friction
+
+---
+
+## Perception Module (Heleri)
+
+The Perception Module is responsible for estimating:
+- Bottle position in 3D space
+- Bottle orientation
+- Fill level (liquid volume estimation)
+- Landing surface properties
+
+This information is used to inform grasp planning and motion generation.

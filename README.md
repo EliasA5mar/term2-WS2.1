@@ -1,3 +1,13 @@
+## Robotic Bottle Flip — System Concept
+
+1. The system must throw a bottle  
+2. The bottle must perform a 360° rotation  
+3. The bottle must land in a vertical position  
+4. The process must be repeatable
+
+
+
+
 # Group Project Repository Submission Template 
 ## Index
   - [Overview](#overview) 

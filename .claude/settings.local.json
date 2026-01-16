@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git merge origin/feature/Helerifirst-work --allow-unrelated-histories -m \"$\\(cat <<''EOF''\nMerge feature/Helerifirst-work branch into main\n\nCo-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git push:*)"
+    ]
+  }
+}
